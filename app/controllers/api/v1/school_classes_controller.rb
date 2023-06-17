@@ -5,7 +5,7 @@ module Api
     class SchoolClassesController < ApplicationController
       def index
         result = SchoolClass.all
-        render json: {status: 'success', classes: result}
+        render json: { status: 'success', classes: result }
       end
 
       def create

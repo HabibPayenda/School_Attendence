@@ -5,7 +5,7 @@ module Api
     class DepartmentsController < ApplicationController
       def index
         result = Department.all
-        render json: {status: 'success', departments: result}
+        render json: { status: 'success', departments: result }
       end
 
       def create

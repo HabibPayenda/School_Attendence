@@ -5,7 +5,7 @@ module Api
     class ParentsController < ApplicationController
       def index
         result = Parent.all
-        render json: {status: 'success', parents: result}
+        render json: { status: 'success', parents: result }
       end
 
       def create

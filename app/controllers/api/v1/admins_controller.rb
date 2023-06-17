@@ -3,10 +3,9 @@
 module Api
   module V1
     class AdminsController < ApplicationController
-
       def index
         result = Admin.all
-        render json: {status: 'success', admins: result}
+        render json: { status: 'success', admins: result }
       end
 
       def create

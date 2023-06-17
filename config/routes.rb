@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-
-  post 'admins', to: 'admins#create'
-  get 'teachers', to: 'teachers#index'
+      post 'admins', to: 'admins#create'
+      get 'teachers', to: 'teachers#index'
     end
-    end
+  end
 end
