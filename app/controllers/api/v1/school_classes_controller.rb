@@ -24,7 +24,7 @@ module Api
                                                                          department: {},
                                                                          teacher: {},
                                                                          students: [],
-                                                                         attendences: { include: :attendence_records }
+                                                                         attendences: { include: {attendence_records: {include: :student}}  }
                                                                        }) }
       end
 
@@ -42,7 +42,7 @@ module Api
           attendance_record = AttendenceRecord.new
           attendance_record.attendence_id = attendance.id
           attendance_record.student_id = student.id
-
+          attendance_record.status = 'pending'
           attendance_record.save
         end
 
