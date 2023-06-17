@@ -24,7 +24,7 @@ module Api
                                                                          department: {},
                                                                          teacher: {},
                                                                          students: [],
-                                                                         attendences: {include: :attendence_records}
+                                                                         attendences: { include: :attendence_records }
                                                                        }) }
       end
 
@@ -36,13 +36,13 @@ module Api
 
         school_class_attendance.school_class_id = school_class.id
         school_class_attendance.attendence_id = attendance.id
-        if school_class_attendance.save
-          school_class.students.each do |student|
-            attendance_record = AttendenceRecord.new
-            attendance_record.attendence_id = attendance.id
-            attendance_record.student_id = student.id
-            attendance_record.save
-          end
+        return unless school_class_attendance.save
+
+        school_class.students.each do |student|
+          attendance_record = AttendenceRecord.new
+          attendance_record.attendence_id = attendance.id
+          attendance_record.student_id = student.id
+          attendance_record.save
         end
       end
 
