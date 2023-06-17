@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'admins', to: 'admins#create'
 
+      get 'departments', to: 'departments#index'
+      post 'departments', to: 'departments#create'
+
       get 'teachers', to: 'teachers#index'
       post 'teachers', to: 'teachers#create'
 
