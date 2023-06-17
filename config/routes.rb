@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       get 'departments', to: 'departments#index'
       post 'departments', to: 'departments#create'
 
+      get 'classes', to: 'school_classes#index'
+      post 'classes', to: 'school_classes#create'
+
       get 'teachers', to: 'teachers#index'
       post 'teachers', to: 'teachers#create'
 

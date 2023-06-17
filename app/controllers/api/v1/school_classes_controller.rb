@@ -26,7 +26,7 @@ module Api
       private
 
       def classes_params
-        params.require(:school_class).permit(:name, :teacher_id, :room_number)
+        params.require(:school_class).permit(:name, :department_id, :room_number)
       end
     end
   end
