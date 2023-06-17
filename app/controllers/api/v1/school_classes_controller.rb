@@ -4,13 +4,25 @@ module Api
   module V1
     class SchoolClassesController < ApplicationController
       def index
-        result = SchoolClass.all
-        render json: { status: 'success', classes: result }
+        result = SchoolClass.includes(:department, :teacher).all
+        render json: { status: 'success', classes: result.as_json(include: {
+            department: {},
+            teacher: {}
+        }) }
       end
 
       def create
         result = SchoolClass.new(classes_params)
         render json: { status: 'success', class: result } if result.save
+      end
+
+      def show
+        result = SchoolClass.includes(:department, :teacher, :students).find(params[:id])
+        render json: { status: 'success', single_class: result.as_json(include: {
+            department: {},
+            teacher: {},
+            students: []
+        }) } if result.present?
       end
 
       def update
