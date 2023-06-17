@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'admins', to: 'admins#create'
+
       get 'teachers', to: 'teachers#index'
+      post 'teachers', to: 'teachers#create'
+
+      get 'students', to: 'students#index'
+      post 'students', to: 'students#create'
     end
   end
 end

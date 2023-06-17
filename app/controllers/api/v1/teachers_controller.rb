@@ -26,6 +26,7 @@ module Api
       private
 
       def teacher_params
+        puts params
         params.require(:teacher).permit(:name, :email, :phone, :subject, :password)
       end
     end
