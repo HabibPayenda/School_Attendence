@@ -6,9 +6,9 @@ module Api
       def index
         result = SchoolClass.includes(:department, :teacher).all
         render json: { status: 'success', classes: result.as_json(include: {
-            department: {},
-            teacher: {}
-        }) }
+                                                                    department: {},
+                                                                    teacher: {}
+                                                                  }) }
       end
 
       def create
@@ -18,11 +18,13 @@ module Api
 
       def show
         result = SchoolClass.includes(:department, :teacher, :students).find(params[:id])
+        return unless result.present?
+
         render json: { status: 'success', single_class: result.as_json(include: {
-            department: {},
-            teacher: {},
-            students: []
-        }) } if result.present?
+                                                                         department: {},
+                                                                         teacher: {},
+                                                                         students: []
+                                                                       }) }
       end
 
       def update
