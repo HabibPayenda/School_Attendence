@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveParentsIdFromStudents < ActiveRecord::Migration[7.0]
   def change
     remove_index :students, :parent_id
