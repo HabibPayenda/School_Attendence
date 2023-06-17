@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       post 'classes', to: 'school_classes#create'
       get 'classes/:id', to: 'school_classes#show'
 
+      get 'classes/take_attendance/:id', to: 'school_classes#take_attendance'
+
       get 'teachers', to: 'teachers#index'
       post 'teachers', to: 'teachers#create'
 

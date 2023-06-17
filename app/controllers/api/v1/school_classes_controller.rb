@@ -42,8 +42,11 @@ module Api
           attendance_record = AttendenceRecord.new
           attendance_record.attendence_id = attendance.id
           attendance_record.student_id = student.id
+
           attendance_record.save
         end
+
+        render json: { status: 'success' }
       end
 
       def update
