@@ -17,14 +17,33 @@ module Api
       end
 
       def show
-        result = SchoolClass.includes(:department, :teacher, :students).find(params[:id])
+        result = SchoolClass.includes(:department, :teacher, :students, :attendences).find(params[:id])
         return unless result.present?
 
         render json: { status: 'success', single_class: result.as_json(include: {
                                                                          department: {},
                                                                          teacher: {},
-                                                                         students: []
+                                                                         students: [],
+                                                                         attendences: {include: :attendence_records}
                                                                        }) }
+      end
+
+      def take_attendance
+        school_class = SchoolClass.includes(:students).find(params[:id])
+        attendance = Attendence.new if school_class.present?
+
+        school_class_attendance = SchollClassAttendence.new if attendance.save
+
+        school_class_attendance.school_class_id = school_class.id
+        school_class_attendance.attendence_id = attendance.id
+        if school_class_attendance.save
+          school_class.students.each do |student|
+            attendance_record = AttendenceRecord.new
+            attendance_record.attendence_id = attendance.id
+            attendance_record.student_id = student.id
+            attendance_record.save
+          end
+        end
       end
 
       def update
