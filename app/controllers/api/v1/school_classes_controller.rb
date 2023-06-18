@@ -46,7 +46,14 @@ module Api
           attendance_record.save
         end
 
-        render json: { status: 'success' }
+        result = SchoolClass.includes(:department, :teacher, :students, :attendences).find(params[:id])
+
+        render json: { status: 'success', single_class: result.as_json(include: {
+            department: {},
+            teacher: {},
+            students: [],
+            attendences: { include: { attendence_records: { include: :student } } }
+        }) } if result.present?
       end
 
       def update
