@@ -24,7 +24,7 @@ module Api
                                                                          department: {},
                                                                          teacher: {},
                                                                          students: [],
-                                                                         attendences: { include: {attendence_records: {include: :student}}  }
+                                                                         attendences: { include: { attendence_records: { include: :student } } }
                                                                        }) }
       end
 
@@ -62,15 +62,18 @@ module Api
       def attendance
         result = AttendenceRecord.includes(:student).find(params[:id])
         result.status = params[:status]
+        return unless result.save
+
         render json: { status: 'success', attendance_record: result.as_json(include: {
-            student: {}
-        }) } if result.save
+                                                                              student: {}
+                                                                            }) }
       end
 
       private
 
       def classes_params
-        params.require(:school_class).permit(:name, :department_id, :room_number, :teacher_id, :student_id, :attendence_id, :status)
+        params.require(:school_class).permit(:name, :department_id, :room_number, :teacher_id, :student_id,
+                                             :attendence_id, :status)
       end
     end
   end
