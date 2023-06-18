@@ -59,10 +59,18 @@ module Api
         render json: { status: 'success', class: result } if result.destroy
       end
 
+      def attendance
+        result = AttendenceRecord.includes(:student).find(params[:id])
+        result.status = params[:status]
+        render json: { status: 'success', attendance_record: result.as_json(include: {
+            student: {}
+        }) } if result.save
+      end
+
       private
 
       def classes_params
-        params.require(:school_class).permit(:name, :department_id, :room_number, :teacher_id)
+        params.require(:school_class).permit(:name, :department_id, :room_number, :teacher_id, :student_id, :attendence_id, :status)
       end
     end
   end
