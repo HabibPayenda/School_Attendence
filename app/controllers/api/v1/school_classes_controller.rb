@@ -53,7 +53,7 @@ module Api
             teacher: {},
             students: [],
             attendences: { include: { attendence_records: { include: :student } } }
-        }) } if result.present?
+        }) }
       end
 
       def update
