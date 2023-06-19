@@ -8,6 +8,12 @@ module Api
         render json: { status: 'success', departments: result }
       end
 
+      def show
+        result = Department.includes(:school_classes).find(params[:id])
+
+        render json: { status: 'success', department: result.as_json({ school_classes: [] }) }
+      end
+
       def create
         result = Department.new(department_params)
         render json: { status: 'success', department: result } if result.save

@@ -49,11 +49,11 @@ module Api
         result = SchoolClass.includes(:department, :teacher, :students, :attendences).find(params[:id])
 
         render json: { status: 'success', single_class: result.as_json(include: {
-            department: {},
-            teacher: {},
-            students: [],
-            attendences: { include: { attendence_records: { include: :student } } }
-        }) }
+                                                                         department: {},
+                                                                         teacher: {},
+                                                                         students: [],
+                                                                         attendences: { include: { attendence_records: { include: :student } } }
+                                                                       }) }
       end
 
       def update
