@@ -9,8 +9,9 @@ module Api
       end
 
       def create
-        result = Parent.new(parent_params)
-        render json: { status: 'success', parent: result } if result.save
+        parent = Parent.new(parent_params)
+        result = Student.includes(:department, :school_class, :parent).find(params[:student_id]) if parent.save
+        render json: { status: 'success', student: result.as_json(include: { department: {}, school_class: {}, parent: {}})} if result.present?
       end
 
       def update

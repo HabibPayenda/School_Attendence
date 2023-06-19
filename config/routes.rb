@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 
       get 'students', to: 'students#index'
       post 'students', to: 'students#create'
+      get 'students/:id', to: 'students#show'
+
+      post 'parents', to: 'parents#create'
     end
   end
 end

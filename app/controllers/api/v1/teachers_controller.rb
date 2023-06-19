@@ -11,7 +11,7 @@ module Api
       def show
         result = Teacher.includes(:school_classes).find(params[:id])
         render json: { status: 'success', teacher: result.as_json(include: {
-                                                                    school_classes: { include: { teacher: {}, teacher: {} } }
+                                                                    school_classes: { include: { teacher: {}, department: {} } }
                                                                   }) }
       end
 
