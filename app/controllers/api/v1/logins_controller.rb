@@ -32,8 +32,9 @@ module Api
 
       def parent_login
         parent = Parent.where(name: params[:name], password: params[:password]).first
+        student = Student.find(parent.student_id) if parent.present?
         if parent
-          render json: { status: 'success', user: parent, user_type: 'parent' }, status: :ok
+          render json: { status: 'success', user: student, user_type: 'parent' }, status: :ok
         else
           render json: { status: 'error', message: 'Invalid name or password' }, status: :unauthorized
         end
