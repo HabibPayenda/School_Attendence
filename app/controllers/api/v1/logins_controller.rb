@@ -38,7 +38,6 @@ module Api
           render json: { status: 'error', message: 'Invalid name or password' }, status: :unauthorized
         end
       end
-
     end
   end
 end
