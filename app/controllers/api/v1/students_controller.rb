@@ -28,6 +28,11 @@ module Api
         render json: { status: 'success', student: result } if result.destroy
       end
 
+      def show_attendance
+        result = AttendenceRecord.where(student_id: params[:id]).all.order(created_at: :desc).limit(10)
+        render json: { status: 'success', records: result }
+      end
+
       private
 
       def student_params

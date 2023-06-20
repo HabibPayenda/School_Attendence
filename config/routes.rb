@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
+
+      post 'login_admin', to: 'logins#admin_login'
+
       post 'admins', to: 'admins#create'
 
       get 'departments', to: 'departments#index'
@@ -27,6 +30,7 @@ Rails.application.routes.draw do
       get 'students', to: 'students#index'
       post 'students', to: 'students#create'
       get 'students/:id', to: 'students#show'
+      get 'student_attendance/:id', to: 'students#show_attendance'
 
       post 'parents', to: 'parents#create'
     end
