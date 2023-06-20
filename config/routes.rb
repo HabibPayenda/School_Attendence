@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       post 'login_admin', to: 'logins#admin_login'
+      post 'login_teacher', to: 'logins#teacher_login'
+      post 'login_student', to: 'logins#student_login'
+      post 'login_parent', to: 'logins#parent_login'
 
       post 'admins', to: 'admins#create'
 
