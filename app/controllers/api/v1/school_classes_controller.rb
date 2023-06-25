@@ -13,7 +13,7 @@ module Api
 
       def create
         result = SchoolClass.new(classes_params)
-        render json: { status: 'success', class: result } if result.save
+        render json: { status: 'success', single_class: result } if result.save
       end
 
       def show
@@ -58,12 +58,13 @@ module Api
 
       def update
         result = SchoolClass.find(params[:id]).update(classes_params)
-        render json: { status: 'success', class: result } if result.save
+        result = SchoolClass.find(params[:id]) if result
+        render json: { status: 'success', single_class: result }
       end
 
       def destroy
         result = SchoolClass.find(params[:id])
-        render json: { status: 'success', class: result } if result.destroy
+        render json: { status: 'success', single_class: result } if result.destroy
       end
 
       def attendance

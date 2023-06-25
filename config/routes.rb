@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       get 'classes', to: 'school_classes#index'
       post 'classes', to: 'school_classes#create'
       get 'classes/:id', to: 'school_classes#show'
+      patch 'classes/:id', to: 'school_classes#update'
+      delete 'classes/:id', to: 'school_classes#destroy'
 
       get 'classes/take_attendance/:id', to: 'school_classes#take_attendance'
       post 'classes/take_attendance/:id', to: 'school_classes#attendance'
