@@ -22,7 +22,8 @@ module Api
 
       def update
         result = Teacher.find(params[:id]).update(teacher_params)
-        render json: { status: 'success', teacher: result } if result.save
+        result = Teacher.find(params[:id]) if result
+        render json: { status: 'success', teacher: result }
       end
 
       def destroy
