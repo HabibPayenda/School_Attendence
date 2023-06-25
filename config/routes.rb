@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post 'departments', to: 'departments#create'
       get 'departments/:id', to: 'departments#show'
       delete 'departments/:id', to: 'departments#destroy'
+      patch 'departments/:id', to: 'departments#update'
 
       get 'classes', to: 'school_classes#index'
       post 'classes', to: 'school_classes#create'
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
       get 'teachers', to: 'teachers#index'
       post 'teachers', to: 'teachers#create'
       get 'teachers/:id', to: 'teachers#show'
+      patch 'teachers/:id', to: 'teachers#update'
+      delete 'teachers/:id', to: 'teachers#destroy'
 
       get 'students', to: 'students#index'
       post 'students', to: 'students#create'

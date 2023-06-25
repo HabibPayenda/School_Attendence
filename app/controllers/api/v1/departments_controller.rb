@@ -23,7 +23,8 @@ module Api
 
       def update
         result = Department.find(params[:id]).update(department_params)
-        render json: { status: 'success', department: result } if result.save
+        result = Department.find(params[:id]) if result
+        render json: { status: 'success', department: result }
       end
 
       def destroy
