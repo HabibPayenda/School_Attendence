@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       get 'students', to: 'students#index'
       post 'students', to: 'students#create'
       get 'students/:id', to: 'students#show'
+      patch 'students/:id', to: 'students#update'
+      delete 'students/:id', to: 'students#destroy'
       get 'student_attendance/:id', to: 'students#show_attendance'
 
       post 'parents', to: 'parents#create'

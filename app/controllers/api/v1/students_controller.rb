@@ -20,8 +20,10 @@ module Api
       end
 
       def update
-        result = Student.find(params[:id]).update(student_params)
-        render json: { status: 'success', student: result } if result.save
+          student = Student.find(params[:id]).update(student_params)
+          result = Student.includes(:department, :school_class, :parent).find(params[:id]) if student
+          render json: { status: 'success',
+                         student: result.as_json(include: { department: {}, school_class: {}, parent: {} }) }
       end
 
       def destroy
@@ -38,7 +40,7 @@ module Api
 
       def student_params
         params.require(:student).permit(:name, :email, :password, :phone, :address, :grade, :date_of_birth,
-                                        :school_class_id)
+                                        :school_class_id, :id)
       end
     end
   end
