@@ -12,8 +12,12 @@ module Api
       end
 
       def create
-        result = SchoolClass.new(classes_params)
-        render json: { status: 'success', single_class: result } if result.save
+        school_class = SchoolClass.new(classes_params)
+        result = SchoolClass.includes(:department, :teacher).find(school_class.id) if school_class.save
+        render json: { status: 'success', single_class: result.as_json(include: {
+            department: {},
+            teacher: {}
+        }) }
       end
 
       def show
