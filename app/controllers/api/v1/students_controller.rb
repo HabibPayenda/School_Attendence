@@ -20,10 +20,10 @@ module Api
       end
 
       def update
-          student = Student.find(params[:id]).update(student_params)
-          result = Student.includes(:department, :school_class, :parent).find(params[:id]) if student
-          render json: { status: 'success',
-                         student: result.as_json(include: { department: {}, school_class: {}, parent: {} }) }
+        student = Student.find(params[:id]).update(student_params)
+        result = Student.includes(:department, :school_class, :parent).find(params[:id]) if student
+        render json: { status: 'success',
+                       student: result.as_json(include: { department: {}, school_class: {}, parent: {} }) }
       end
 
       def destroy

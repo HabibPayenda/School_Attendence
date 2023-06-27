@@ -15,9 +15,9 @@ module Api
         school_class = SchoolClass.new(classes_params)
         result = SchoolClass.includes(:department, :teacher).find(school_class.id) if school_class.save
         render json: { status: 'success', single_class: result.as_json(include: {
-            department: {},
-            teacher: {}
-        }) }
+                                                                         department: {},
+                                                                         teacher: {}
+                                                                       }) }
       end
 
       def show
@@ -64,11 +64,11 @@ module Api
         result = SchoolClass.find(params[:id]).update(classes_params)
         result = SchoolClass.includes(:department, :teacher, :students, :attendences).find(params[:id]) if result
         render json: { status: 'success', single_class: result.as_json(include: {
-            department: {},
-            teacher: {},
-            students: [],
-            attendences: { include: { attendence_records: { include: :student } } }
-        }) }
+                                                                         department: {},
+                                                                         teacher: {},
+                                                                         students: [],
+                                                                         attendences: { include: { attendence_records: { include: :student } } }
+                                                                       }) }
       end
 
       def destroy
