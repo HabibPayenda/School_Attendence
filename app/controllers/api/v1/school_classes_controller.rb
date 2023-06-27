@@ -58,8 +58,13 @@ module Api
 
       def update
         result = SchoolClass.find(params[:id]).update(classes_params)
-        result = SchoolClass.find(params[:id]) if result
-        render json: { status: 'success', single_class: result }
+        result = SchoolClass.includes(:department, :teacher, :students, :attendences).find(params[:id]) if result
+        render json: { status: 'success', single_class: result.as_json(include: {
+            department: {},
+            teacher: {},
+            students: [],
+            attendences: { include: { attendence_records: { include: :student } } }
+        }) }
       end
 
       def destroy
