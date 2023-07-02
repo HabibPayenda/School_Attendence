@@ -21,14 +21,15 @@ module Api
       end
 
       def show
-        result = SchoolClass.includes(:department, :teacher, :students, :attendences, :attendence_records).find(params[:id])
+        result = SchoolClass.includes(:department, :teacher, :students, :attendences,
+                                      :attendence_records).find(params[:id])
         return unless result.present?
 
         render json: { status: 'success', single_class: result.as_json(include: {
                                                                          department: {},
                                                                          teacher: {},
                                                                          students: [],
-                                                                         attendence_records: {include: :student},
+                                                                         attendence_records: { include: :student },
                                                                          attendences: { include: { attendence_records: { include: :student } } }
                                                                        }) }
       end
