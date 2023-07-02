@@ -6,4 +6,5 @@ class SchoolClass < ApplicationRecord
   has_many :students, dependent: :destroy
   has_many :scholl_class_attendences, dependent: :destroy
   has_many :attendences, through: :scholl_class_attendences, dependent: :destroy
+  has_many :attendence_records, through: :attendences
 end
