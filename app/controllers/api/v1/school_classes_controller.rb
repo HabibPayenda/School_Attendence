@@ -79,13 +79,21 @@ module Api
       end
 
       def attendance
-        result = AttendenceRecord.includes(:student).find(params[:id])
-        result.status = params[:status]
-        return unless result.save
+        record = AttendenceRecord.includes(:student).find(params[:id])
+        record.status = params[:status]
+        return unless record.save
 
-        render json: { status: 'success', attendance_record: result.as_json(include: {
-                                                                              student: {}
-                                                                            }) }
+        result = SchoolClass.includes(:department, :teacher, :students, :attendences,
+                                      :attendence_records).find(record.student.school_class_id)
+        return unless result.present?
+
+        render json: { status: 'success', single_class: result.as_json(include: {
+            department: {},
+            teacher: {},
+            students: [],
+            attendence_records: { include: :student },
+            attendences: { include: { attendence_records: { include: :student } } }
+        }) }
       end
 
       private
