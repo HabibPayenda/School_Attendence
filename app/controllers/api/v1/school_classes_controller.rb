@@ -14,13 +14,13 @@ module Api
       def create
         school_class = SchoolClass.new(classes_params)
         if school_class.save
-        result = SchoolClass.includes(:department, :teacher).find(school_class.id)
-        render json: { status: 'success', single_class: result.as_json(include: {
-                                                                         department: {},
-                                                                         teacher: {}
-                                                                       }) }
+          result = SchoolClass.includes(:department, :teacher).find(school_class.id)
+          render json: { status: 'success', single_class: result.as_json(include: {
+                                                                           department: {},
+                                                                           teacher: {}
+                                                                         }) }
         else
-          render json: {status: 'failed', message: 'Name has already been taken' }
+          render json: { status: 'failed', message: 'Name has already been taken' }
         end
       end
 
@@ -92,12 +92,12 @@ module Api
         return unless result.present?
 
         render json: { status: 'success', single_class: result.as_json(include: {
-            department: {},
-            teacher: {},
-            students: [],
-            attendence_records: { include: :student },
-            attendences: { include: { attendence_records: { include: :student } } }
-        }) }
+                                                                         department: {},
+                                                                         teacher: {},
+                                                                         students: [],
+                                                                         attendence_records: { include: :student },
+                                                                         attendences: { include: { attendence_records: { include: :student } } }
+                                                                       }) }
       end
 
       private
